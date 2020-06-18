@@ -38,6 +38,9 @@ rnil_info = {}
 # number of entries in each table
 N_TO_SHOW = 10
 
+# minimum number of QSOs; 50 for one year, 250 for ten years
+MIN_QSOS = 250
+
 # determine what constitutes a W; this isn't perfect, but it's good enough for this Q&D python code
 def is_w(call, call_zone) :
     call_first_char = call[0]
@@ -85,7 +88,7 @@ nrnil_info = []
 
 # require 50 rQSOs; do not include calls with 100% rNILs
 for call in rnil_info:
-  if rnil_info[call][0] >= 50 and rnil_info[call][1] != rnil_info[call][0] :
+  if rnil_info[call][0] >= MIN_QSOS and rnil_info[call][1] != rnil_info[call][0] :
     nrnil_info.append( ( call,  rnil_info[call][0], rnil_info[call][1], rnil_info[call][2], rnil_info[call][3] ) )
 
 # absolute most rNILS:
@@ -131,7 +134,7 @@ print("<br/>\n<br/>")
 nrnil_info = []
 
 for call in rnil_info :
-  if rnil_info[call][2] >= 25 and rnil_info[call][1] != rnil_info[call][0] :
+  if rnil_info[call][2] >= (MIN_QSOS / 2) and rnil_info[call][1] != rnil_info[call][0] :
     nrnil_info.append( ( call,  rnil_info[call][0], rnil_info[call][1], rnil_info[call][2], rnil_info[call][3] ) )
 
 # most rNILs against Ws
